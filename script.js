@@ -42,21 +42,45 @@ addBook.addEventListener('click', (e) => {
     bookCard.classList.add('book-card');
     bookContainer.appendChild(bookCard);
 
+    const titleAuthorGroup = document.createElement('div');
+    titleAuthorGroup.classList.add('title-author-group');
+    bookCard.appendChild(titleAuthorGroup);
+
     const bookTitle = document.createElement('h3');
     bookTitle.textContent = `${myLibrary[count].title}`;
-    bookCard.appendChild(bookTitle);
+    titleAuthorGroup.appendChild(bookTitle);
 
-    const bookAuthor = document.createElement('h3');
-    bookAuthor.textContent = `${myLibrary[count].author}`;
-    bookCard.appendChild(bookAuthor);
+    const bookAuthor = document.createElement('p');
+    bookAuthor.textContent = `by ${myLibrary[count].author}`;
+    bookAuthor.classList.add('author');
+    titleAuthorGroup.appendChild(bookAuthor);
+
+    const pagesReadGroup = document.createElement('div');
+    pagesReadGroup.classList.add('pages-read-group');
+    bookCard.appendChild(pagesReadGroup);
 
     const bookPages = document.createElement('p');
-    bookPages.textContent = `${myLibrary[count].pages}`;
-    bookCard.appendChild(bookPages);
+    bookPages.textContent = `${myLibrary[count].pages} pages`;
+    pagesReadGroup.appendChild(bookPages);
 
-    const bookRead = document.createElement('p');
-    bookRead.textContent = `${myLibrary[count].read}`;
-    bookCard.appendChild(bookRead);
+    if (myLibrary[count].read === "Not Read") {
+      const markRead = document.createElement('button');
+      markRead.textContent = `Mark Read`;
+      markRead.classList.add('primary-button');
+      pagesReadGroup.appendChild(markRead);
+    } else {
+      const bookRead = document.createElement('p');
+      bookRead.innerHTML = `<span class="material-symbols-outlined">
+      check_circle
+      </span> ${myLibrary[count].read}`;
+      pagesReadGroup.appendChild(bookRead);
+    }
+
+    const deleteBook = document.createElement('button');
+    deleteBook.textContent = `Delete`;
+    deleteBook.classList.add('delete');
+    bookCard.appendChild(deleteBook);
+
 
     count++;
   }

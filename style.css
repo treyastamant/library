@@ -1,33 +1,149 @@
+:root {
+  --yellow: #FFD700;
+  --green: #7EB09B;
+  --light-green: #dfebe8;
+  --red: #E2725B;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 h1 {
   text-align: center;
 }
+
 form {
-  border: 1px solid;
-  margin: 20px;
+  border: 1px solid var(--green);
+  border-radius: 5px;
+  background-color: var(--light-green);
+  box-shadow: 5px 5px 0px 0px rgba(0,0,0,0.2);
   padding: 20px;
   display: grid;
-  gap: 15px;
+  gap: 18px;
+  justify-content: center;
+  width: 350px;
+  margin: 20px auto;
 }
 
-.books-container {
+.group input {
+  padding: 8px;
+  margin: 0;
+  border-radius: 3px;
+  border: .5px solid;
+  align-self: end;
+  width: 330px;
+}
+
+.group {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
+  align-items: center;
+  grid-template-rows: 1fr 1fr;
+}
+
+.group label, legend {
+  font-weight: 600;
+}
+
+fieldset {
+  border: none;
+  text-align: left;
+  padding: 8px 0;
+}
+ fieldset div {
+  padding: 5px 0;
+ }
+
+
+.button-container {
+  text-align: center;
+}
+
+.primary-button {
+  padding: 8px 20px;
+  font-size: 16px;
+  border-style: none;
+  border-radius: 5px;
+  background-color: var(--yellow);
+  box-shadow: 3px 3px 0px 0px rgba(0,0,0,0.2);
+}
+
+.primary-button:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px 0px rgba(0,0,0,0.2);
+}
+
+.primary-button:active {
+  filter: brightness(105%); 
+}
+
+
+.books-container {
+  margin: 20px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 250px));
   gap: 20px;
   justify-content: center;
 }
 
 .book-card {
-  border: 1px solid;
+  border: 1px solid var(--green);
   border-radius: 10px;
   /* margin: 20px; */
-  padding: 20px;
+  padding: 20px 10px 10px;
   display: grid;
-  gap: 10px;
-  justify-content: center;
+  grid-template-rows: auto 1fr auto;
+  gap: 20px;
+  justify-content: stretch;
+  align-content: center;
+  box-shadow: 3px 3px 0px 0px rgba(0,0,0,0.1);
 }
 
-.book-card * {
+.title-author-group, .pages-read-group {
+  display: grid;
+  gap: 5px;
+}
+
+.pages-read-group {
+  align-self: start;
+}
+
+.book-card .primary-button {
+  padding: 4px 20px;
+  justify-self: center;
+}
+
+.book-card .author {
+  font-style: italic;
+}
+
+.book-card h3, .book-card p {
   padding: 0;
   margin:  0;
   text-align: center;
+}
+
+.book-card .material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48;
+  color: var(--green);
+  font-size: 16px;
+  display: inline-flex;
+  vertical-align: top;
+}
+
+.delete {
+  background-color: white;
+  color: var(--red);
+  text-decoration: underline;
+  border: none;
+  justify-self: end;
+  padding-top: 15px;
+}
+
+.delete:hover {
+  color: #bf5701;
 }
