@@ -1,26 +1,43 @@
-let myLibrary = [];
-let count = 0;
+const modalControl = (() => {
+  const modal = document.querySelector('.modal');
+  const overlay = document.querySelector('.overlay');
+  const openModalBtn = document.querySelector('.btn-open');
+  const closeModalBtn = document.querySelector('.btn-close');
 
-const modal = document.querySelector('.modal');
-const overlay = document.querySelector('.overlay');
-const openModalBtn = document.querySelector('.btn-open');
-const closeModalBtn = document.querySelector('.btn-close');
+  const openModal = () => {
+    modal.classList.remove('hidden');
+    overlay.classList.remove('hidden');
+  };
 
-const openModal = () => {
-  modal.classList.remove('hidden');
-  overlay.classList.remove('hidden');
-};
+  const closeModal = () => {
+    modal.classList.add('hidden');
+    overlay.classList.add('hidden');
+  };
 
-const closeModal = () => {
-  modal.classList.add('hidden');
-  overlay.classList.add('hidden');
-};
+  openModalBtn.addEventListener('click', openModal);
+  closeModalBtn.addEventListener('click', closeModal);
+  overlay.addEventListener("click", closeModal);
 
-openModalBtn.addEventListener('click', openModal);
-closeModalBtn.addEventListener('click', closeModal);
-overlay.addEventListener("click", closeModal);
+  return {
+    openModal,
+    closeModal
+  }
+})();
 
-const addBook = document.querySelector('.add-book');
+//create book - make class
+function Book(title, author, pages, read) {
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.read = read;
+}
+
+
+const libraryController = (() => {  
+  let myLibrary = [];
+  let count = 0;
+
+  const addBook = document.querySelector('.add-book');
 addBook.addEventListener('click', (e) => {
   e.preventDefault();
  //take users input and store new book objects into an array
@@ -48,7 +65,7 @@ addBook.addEventListener('click', (e) => {
     const book = new Book(title.value, author.value, pages.value, readValue);
     myLibrary.push(book);
     displayBookInLibrary(book);
-    closeModal();
+    modalControl.closeModal();
     document.getElementById('form').reset();
   }
 });
@@ -64,13 +81,8 @@ author.addEventListener('focus', () => {
 pages.addEventListener('focus', () => {
   pages.classList.remove('invalid');
 });
+//end add book
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
 
 function displayBookInLibrary() {
   //Display new book on the page.
@@ -145,6 +157,8 @@ function displayBookInLibrary() {
     deleteBook.parentElement.remove();
   });
 }
+
+})();
 
 
 
